@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
+    "@shopify/flash-list": "2.0.2",
     "colord": "^2.9.3",
     "expo": "~54.0.13",
     "expo-font": "^14.0.9",
