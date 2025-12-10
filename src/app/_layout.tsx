@@ -17,7 +17,7 @@ function RootLayoutContent() {
   return (
     <>
       <View className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}>
-        <SafeAreaView className="flex-1 bg-background">
+        <SafeAreaView className="flex-1 bg-background dark:bg-backgroundDark">
           <InitialLayout />
         </SafeAreaView>
       </View>

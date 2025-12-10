@@ -7,10 +7,10 @@ export function Loader() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ffffff", // Light background
+        backgroundColor: "hsl(220 100% 97%)", // Light background
       }}
     >
-      <ActivityIndicator size="large" color="#007acc" /> {/* Light primary */}
+      <ActivityIndicator size="large" color="hsl(221 49% 33%)" /> {/* Light primary */}
     </View>
   );
 }

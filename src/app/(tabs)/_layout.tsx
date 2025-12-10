@@ -7,10 +7,10 @@ export default function TabsLayout() {
 
   const isDark = colorScheme === "dark";
 
-  // TokyoNight colors
-  const inactiveColor = isDark ? "#787c99" : "#6c757d"; // grey
-  const activeColor = isDark ? "#7aa2f7" : "#007acc"; // primary
-  const backgroundColor = isDark ? "#32344a" : "#f8f9fa"; // surface
+  // Custom colors
+  const inactiveColor = isDark ? "hsl(220 35% 73%)" : "hsl(220 26% 31%)"; // muted
+  const activeColor = isDark ? "hsl(220 78% 76%)" : "hsl(221 49% 33%)"; // primary
+  const backgroundColor = isDark ? "hsl(220 35% 10%)" : "hsl(220 100% 100%)"; // surface
 
   return (
     <Tabs
