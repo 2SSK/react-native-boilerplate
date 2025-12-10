@@ -7,7 +7,7 @@ export default function Settings() {
 
   return (
     <View className="flex-1 justify-center items-center bg-background">
-      <Text className="text-foreground text-2xl mb-5">Settings</Text>
+      <Text className="text-foreground text-2xl mb-5 font-heading">Settings</Text>
       <Button className="text-foreground bg-black" onPress={() => router.push('/')}>
         Home
       </Button>

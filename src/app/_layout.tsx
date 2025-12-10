@@ -30,6 +30,7 @@ const RootLayoutContent = React.memo(() => {
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     JetBrainsMono: require("../assets/fonts/JetBrainsMono-Medium.ttf"),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -38,7 +39,9 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <ErrorBoundary fallback={<Text className="text-red-500">Something went wrong.</Text>}>
+      <ErrorBoundary
+        fallback={<Text className="text-red">Something went wrong.</Text>}
+      >
         <RootLayoutContent />
       </ErrorBoundary>
       <PortalHost />
