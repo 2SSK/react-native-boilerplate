@@ -1,4 +1,3 @@
-import { COLORS } from "@/constants/theme";
 import { ActivityIndicator, View } from "react-native";
 
 export function Loader() {
@@ -8,10 +7,10 @@ export function Loader() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.background,
+        backgroundColor: "#ffffff", // Light background
       }}
     >
-      <ActivityIndicator size="large" color={COLORS.primary} />
+      <ActivityIndicator size="large" color="#007acc" /> {/* Light primary */}
     </View>
   );
 }

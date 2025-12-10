@@ -1,19 +1,27 @@
 import InitialLayout from "@/components/InitialLayout";
 import { Loader } from "@/components/Loader";
-import { ThemeProvider, useTheme } from "@/providers/ThemeProvider";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { cssInterop } from "nativewind";
+import { Text, View } from "react-native";
+import { useColorScheme } from "nativewind";
+
+import "../../global.css";
+
+cssInterop(Text, { className: "style" });
 
 function RootLayoutContent() {
-  const { theme, themeType } = useTheme();
+  const { colorScheme } = useColorScheme();
 
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
-        <InitialLayout />
-      </SafeAreaView>
-      <StatusBar style={themeType === 'dark' ? 'light' : 'dark'} />
+      <View className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}>
+        <SafeAreaView className="flex-1 bg-background">
+          <InitialLayout />
+        </SafeAreaView>
+      </View>
+      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
     </>
   );
 }
@@ -28,10 +36,8 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider>
-      <SafeAreaProvider>
-        <RootLayoutContent />
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <RootLayoutContent />
+    </SafeAreaProvider>
   );
 }
