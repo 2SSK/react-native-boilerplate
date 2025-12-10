@@ -6,6 +6,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { cssInterop } from "nativewind";
 import { Text, View } from "react-native";
 import { useColorScheme } from "nativewind";
+import { PortalHost } from "@rn-primitives/portal";
 
 import "../../global.css";
 
@@ -38,6 +39,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <RootLayoutContent />
+      <PortalHost />
     </SafeAreaProvider>
   );
 }
