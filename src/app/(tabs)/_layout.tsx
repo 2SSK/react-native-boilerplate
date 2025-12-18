@@ -1,16 +1,17 @@
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { colors } from "@/lib/theme";
+import { House, Settings } from "lucide-react-native";
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarInactiveTintColor: 'var(--fg)',
-        tabBarActiveTintColor: 'var(--blu)',
+        tabBarInactiveTintColor: colors.muted,
+        tabBarActiveTintColor: colors.primary,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: 'var(--blk)',
+          backgroundColor: colors.card,
           borderTopWidth: 0,
           position: "absolute",
           elevation: 0,
@@ -23,9 +24,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" color={color} size={size} />
-          ),
+          tabBarIcon: ({ color, size }) => <House color={color} size={size} />,
           headerShown: false,
         }}
       />
@@ -34,7 +33,7 @@ export default function TabsLayout() {
         name="settings"
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" color={color} size={size} />
+            <Settings color={color} size={size} />
           ),
           headerShown: false,
         }}
