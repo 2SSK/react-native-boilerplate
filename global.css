@@ -4,20 +4,36 @@
 
 @layer base {
   :root {
-    --bg: #1a1b26;
-    --fg: #a9b1d6;
-    --blk: #32344a;
-    --red: #f7768e;
-    --grn: #9ece6a;
-    --ylw: #e0af68;
-    --blu: #7aa2f7;
-    --mag: #ad8ee6;
-    --cyn: #0db9d7;
-    --brblk: #444b6a;
+    /* Source tokens */
+    --color-bg-primary: #1a1b26;
+    --color-fg-primary: #c0caf5;
+    --color-fg-muted: #a9b1d6;
+    --color-fg-comment: #565f89;
 
-    --background: #1a1b26;
-    --foreground: #c0caf5;
-    --muted: #a9b1d6;
-    --comment: #565f89;
+    --color-accent-red: #f7768e;
+    --color-accent-green: #9ece6a;
+    --color-accent-yellow: #e0af68;
+    --color-accent-blue: #7aa2f7;
+    --color-accent-magenta: #ad8ee6;
+    --color-accent-cyan: #0db9d7;
+
+    --color-surface-1: #32344a;
+    --color-surface-2: #444b6a;
+
+    /* 🔹 Tailwind aliases */
+    --background: var(--color-bg-primary);
+    --foreground: var(--color-fg-primary);
+    --muted: var(--color-fg-muted);
+    --card: var(--color-surface-1);
+    --border: var(--color-surface-2);
+
+    --primary: var(--color-accent-blue);
+    --secondary: var(--color-accent-magenta);
+    --accent: var(--color-accent-cyan);
+
+    --destructive: var(--color-accent-red);
+    --warning: var(--color-accent-yellow);
+    --success: var(--color-accent-green);
+    --info: var(--color-accent-cyan);
   }
 }
