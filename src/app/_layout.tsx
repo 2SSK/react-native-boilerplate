@@ -1,26 +1,36 @@
 import InitialLayout from "@/components/InitialLayout";
 import { Loader } from "@/components/Loader";
-import { ThemeProvider, useTheme } from "@/providers/ThemeProvider";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { cssInterop } from "nativewind";
+import { Text, View, ActivityIndicator } from "react-native";
+import { PortalHost } from "@rn-primitives/portal";
+import { ErrorBoundary } from "react-error-boundary";
+import React from "react";
 
-function RootLayoutContent() {
-  const { theme, themeType } = useTheme();
+import "../../global.css";
 
+cssInterop(Text, { className: "style" });
+cssInterop(ActivityIndicator, { className: "style" });
+
+const RootLayoutContent = React.memo(() => {
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
-        <InitialLayout />
-      </SafeAreaView>
-      <StatusBar style={themeType === 'dark' ? 'light' : 'dark'} />
+      <View className="dark flex-1">
+        <SafeAreaView className="flex-1 bg-background">
+          <InitialLayout />
+        </SafeAreaView>
+      </View>
+      <StatusBar style="light" />
     </>
   );
-}
+});
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     JetBrainsMono: require("../assets/fonts/JetBrainsMono-Medium.ttf"),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -28,10 +38,13 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider>
-      <SafeAreaProvider>
+    <SafeAreaProvider>
+      <ErrorBoundary
+        fallback={<Text className="text-red">Something went wrong.</Text>}
+      >
         <RootLayoutContent />
-      </SafeAreaProvider>
-    </ThemeProvider>
+      </ErrorBoundary>
+      <PortalHost />
+    </SafeAreaProvider>
   );
 }
