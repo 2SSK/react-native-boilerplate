@@ -4,36 +4,230 @@
 
 @layer base {
   :root {
-    /* Source tokens */
-    --color-bg-primary: #1a1b26;
-    --color-fg-primary: #c0caf5;
-    --color-fg-muted: #a9b1d6;
-    --color-fg-comment: #565f89;
+    /* Tokyo Night Light - Calm, minimal, premium */
+    --background: 220 20% 97%;
+    --background-secondary: 220 15% 94%;
+    --foreground: 222 47% 11%;
 
-    --color-accent-red: #f7768e;
-    --color-accent-green: #9ece6a;
-    --color-accent-yellow: #e0af68;
-    --color-accent-blue: #7aa2f7;
-    --color-accent-magenta: #ad8ee6;
-    --color-accent-cyan: #0db9d7;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --color-surface-1: #32344a;
-    --color-surface-2: #444b6a;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* 🔹 Tailwind aliases */
-    --background: var(--color-bg-primary);
-    --foreground: var(--color-fg-primary);
-    --muted: var(--color-fg-muted);
-    --card: var(--color-surface-1);
-    --border: var(--color-surface-2);
+    /* Muted cyan/indigo - Tokyo Night accent */
+    --primary: 217 72% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --primary: var(--color-accent-blue);
-    --secondary: var(--color-accent-magenta);
-    --accent: var(--color-accent-cyan);
+    --secondary: 220 14% 90%;
+    --secondary-foreground: 222 47% 20%;
 
-    --destructive: var(--color-accent-red);
-    --warning: var(--color-accent-yellow);
-    --success: var(--color-accent-green);
-    --info: var(--color-accent-cyan);
+    --muted: 220 14% 92%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 217 72% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success - Soft green for income */
+    --success: 158 64% 40%;
+    --success-foreground: 0 0% 100%;
+
+    /* Expense - Muted red */
+    --expense: 0 65% 55%;
+    --expense-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 217 72% 53%;
+
+    --radius: 1rem;
+
+    /* Tab bar */
+    --tab-bar: 0 0% 100%;
+    --tab-inactive: 220 9% 56%;
+    --tab-active: 217 72% 53%;
+
+    /* Sheet overlay */
+    --overlay: 222 47% 11% / 0.4;
+  }
+
+  .dark {
+    /* Tokyo Night Dark - Deep navy, not pure black */
+    --background: 232 27% 12%;
+    --background-secondary: 232 27% 15%;
+    --foreground: 220 20% 95%;
+
+    --card: 232 27% 16%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 232 27% 14%;
+    --popover-foreground: 220 20% 95%;
+
+    /* Muted cyan - Tokyo Night accent */
+    --primary: 199 89% 68%;
+    --primary-foreground: 232 27% 12%;
+
+    --secondary: 232 20% 22%;
+    --secondary-foreground: 220 20% 88%;
+
+    --muted: 232 20% 20%;
+    --muted-foreground: 220 14% 55%;
+
+    --accent: 199 89% 68%;
+    --accent-foreground: 232 27% 12%;
+
+    /* Success - Soft green for income */
+    --success: 158 64% 52%;
+    --success-foreground: 232 27% 12%;
+
+    /* Expense - Muted red */
+    --expense: 0 72% 63%;
+    --expense-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 63%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 232 20% 22%;
+    --input: 232 20% 24%;
+    --ring: 199 89% 68%;
+
+    /* Tab bar */
+    --tab-bar: 232 27% 14%;
+    --tab-inactive: 220 14% 50%;
+    --tab-active: 199 89% 68%;
+
+    /* Sheet overlay */
+    --overlay: 0 0% 0% / 0.6;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overscroll-behavior: none;
+  }
+}
+
+@layer utilities {
+  /* Safe area insets for mobile */
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl;
+  }
+
+  .glass-heavy {
+    @apply bg-card/95 backdrop-blur-2xl;
+  }
+
+  /* Smooth press feedback */
+  .press-scale {
+    @apply transition-transform active:scale-[0.97] duration-150;
+  }
+
+  /* Amount colors */
+  .amount-income {
+    @apply text-success;
+  }
+
+  .amount-expense {
+    @apply text-expense;
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Animations */
+  .animate-slide-up {
+    animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+  }
+}
+
+/* Keyframes need to be outside layer directives usually or require tailwind config extend */
+/* Moving common animations to global scope if Tailwind doesn't capture them in layers properly without config */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }

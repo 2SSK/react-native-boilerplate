@@ -1,31 +1,33 @@
-import InitialLayout from "@/components/InitialLayout";
 import { Loader } from "@/components/Loader";
 import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { cssInterop } from "nativewind";
 import { Text, View, ActivityIndicator } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import { ErrorBoundary } from "react-error-boundary";
-import React from "react";
 
+import { ThemeProvider, useTheme } from "@/lib/theme";
 import "../../global.css";
 
 cssInterop(Text, { className: "style" });
 cssInterop(ActivityIndicator, { className: "style" });
 
-const RootLayoutContent = React.memo(() => {
+function RootLayoutNav() {
+  const { isDark } = useTheme();
+
   return (
     <>
-      <View className="dark flex-1">
-        <SafeAreaView className="flex-1 bg-background">
-          <InitialLayout />
-        </SafeAreaView>
+      <View className={isDark ? "dark flex-1" : "flex-1"}>
+        <View className="flex-1 bg-background">
+          <Stack screenOptions={{ headerShown: false }} />
+        </View>
       </View>
-      <StatusBar style="light" />
+      <StatusBar style={isDark ? "light" : "dark"} />
     </>
   );
-});
+}
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -39,12 +41,14 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <ErrorBoundary
-        fallback={<Text className="text-red">Something went wrong.</Text>}
-      >
-        <RootLayoutContent />
-      </ErrorBoundary>
-      <PortalHost />
+      <ThemeProvider>
+        <ErrorBoundary
+          fallback={<Text className="text-red-500">Something went wrong.</Text>}
+        >
+          <RootLayoutNav />
+        </ErrorBoundary>
+        <PortalHost />
+      </ThemeProvider>
     </SafeAreaProvider>
   );
 }
