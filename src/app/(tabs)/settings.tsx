@@ -1,13 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { View, Text, Pressable } from "react-native";
-import { useRouter } from "expo-router";
 import { useTheme } from "@/lib/theme";
 import { Moon, Sun } from "lucide-react-native";
 import { Icon } from "@/components/ui/icon";
 
 export default function Settings() {
-  const router = useRouter();
   const { isDark, themeMode, toggleTheme } = useTheme();
 
   return (
@@ -46,14 +43,6 @@ export default function Settings() {
           <Switch checked={isDark} onCheckedChange={toggleTheme} />
         </Pressable>
       </View>
-
-      {/* Navigation Button */}
-      <Button
-        variant="secondary"
-        onPress={() => router.push("/")}
-      >
-        <Text className="text-secondary-foreground">Go to Home</Text>
-      </Button>
     </View>
   );
 }
