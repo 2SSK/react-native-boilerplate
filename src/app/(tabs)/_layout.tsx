@@ -1,6 +1,12 @@
 import { Tabs } from "expo-router";
 import { useTheme, getColors } from "@/lib/theme";
+import { TabIcon } from "@/components/ui/tab-icon";
 import { House, Settings } from "lucide-react-native";
+
+const tabs = [
+  { name: "index", icon: House },
+  { name: "settings", icon: Settings },
+] as const;
 
 export default function TabsLayout() {
   const { isDark } = useTheme();
@@ -24,23 +30,23 @@ export default function TabsLayout() {
         },
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          tabBarIcon: ({ color, size }) => <House color={color} size={size} />,
-          headerShown: false,
-        }}
-      />
-
-      <Tabs.Screen
-        name="settings"
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Settings color={color} size={size} />
-          ),
-          headerShown: false,
-        }}
-      />
+      {tabs.map(({ name, icon: Icon }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabIcon
+                focused={focused}
+                icon={Icon}
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false,
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
